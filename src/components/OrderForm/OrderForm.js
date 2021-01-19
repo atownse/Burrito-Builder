@@ -33,8 +33,6 @@ class OrderForm extends Component {
     if (userName.length > 0 && userIngredients.length > 0) {
       this.props.addOrder(userOrder)
       postOrder(userName, userIngredients)
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
     }
     this.clearInputs();
   }
