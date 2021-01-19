@@ -23,6 +23,15 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const userName = this.state.name
+    const userIngredients = this.state.ingredients
+    let userOrder = {
+      name: userName,
+      ingredients: userIngredients
+    }
+    if (userName.length > 0 && userIngredients.length > 0) {
+      this.props.addOrder(userOrder)
+    }
     this.clearInputs();
   }
 
