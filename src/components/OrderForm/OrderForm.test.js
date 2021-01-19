@@ -7,6 +7,19 @@ import OrderForm from './OrderForm'
 import { getOrders, postOrder } from '../../apiCalls'
 jest.mock('../../apiCalls')
 
+const mockOrders = [
+  {
+    id: 1,
+    name: 'Pat',
+    ingredients: ['beans', 'lettuce', 'cilantro']
+  },
+  {
+    id: 2,
+    name: 'Sam',
+    ingredients: ['steak', 'pico de gallo', 'lettuce']
+  }
+]
+
 describe('Form Component', () => {
   it('should render a name input and ingredient buttons upon load', () => {
     const mockAddOrder = jest.fn()
@@ -37,7 +50,7 @@ describe('Form Component', () => {
 
     expect(mockAddOrder).toHaveBeenCalledTimes(1)
     expect(mockAddOrder).toHaveBeenCalledWith({name: 'Samantha', ingredients: ['beans', 'lettuce']})
-  })
+  }),
 
   it('should not submit if the form is incomplete', () => {
     const mockAddOrder = jest.fn()
