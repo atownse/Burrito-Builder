@@ -38,4 +38,31 @@ describe('Form Component', () => {
     expect(mockAddOrder).toHaveBeenCalledTimes(1)
     expect(mockAddOrder).toHaveBeenCalledWith({name: 'Samantha', ingredients: ['beans', 'lettuce']})
   })
+
+  it('should not submit if the form is incomplete', () => {
+    const mockAddOrder = jest.fn()
+    render(
+      <OrderForm addOrder={ mockAddOrder }/>
+    )
+    
+    const submitButton = screen.getByText('Submit Order')
+    userEvent.click(submitButton)
+    expect(mockAddOrder).toHaveBeenCalledTimes(0)
+
+    const name = screen.getByPlaceholderText('Name')
+    userEvent.type(name, 'Samantha')
+    userEvent.click(submitButton)
+    expect(mockAddOrder).toHaveBeenCalledTimes(0)
+
+    const beanButton = screen.getByText('beans')
+    const lettuceButton = screen.getByText('lettuce')
+
+    userEvent.type(name, 'Samantha')
+    userEvent.click(beanButton)
+    userEvent.click(lettuceButton)
+    userEvent.click(submitButton)
+
+    expect(mockAddOrder).toHaveBeenCalledTimes(1)
+    expect(mockAddOrder).toHaveBeenCalledWith({name: 'Samantha', ingredients: ['beans', 'lettuce']})    
+  })
 })
