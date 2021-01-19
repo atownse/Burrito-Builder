@@ -4,7 +4,7 @@ import './Orders.css';
 const Orders = props => {
   const orderEls = props.orders.map(order => {
     return (
-      <div className="order">
+      <div key={Math.floor(Math.random() * 1000)} className="order">
         <h3>{order.name}</h3>
         <ul className="ingredient-list">
           {order.ingredients.map(ingredient => {
